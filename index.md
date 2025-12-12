@@ -71,7 +71,7 @@
 		  "Country_Of_Card" : " ",
 		  "Bank_Name" : " ",
 		  "BrowserName" : browserInfo,
-		  "BrowserLanguage" : browserLanguage,
+		  "BrowserLanguage" : "es",
 		  "BrowserPlatform" : browserPlatform,
 		  "UserAgent" : " ",
 		  "ScreenResolution" : screenResolution,
