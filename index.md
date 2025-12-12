@@ -71,7 +71,7 @@
 		  "Country_Of_Card" : " ",
 		  "Bank_Name" : " ",
 		  "BrowserName" : browserInfo,
-		  "BrowserLanguage" : "Spanish",
+		  "BrowserLanguage" : browserLanguage,
 		  "BrowserPlatform" : browserPlatform,
 		  "UserAgent" : " ",
 		  "ScreenResolution" : screenResolution,
@@ -94,7 +94,7 @@
 			//console.log('Idioma definido:', finalLanguage);	
 
    			//Using Variables:            
-            var LANGUAGE = 'Portuguese';
+            var LANGUAGE = 'Spanish';
             var languageMap = {
             'Portuguese': 'pt-BR',
             'Spanish': 'es',
