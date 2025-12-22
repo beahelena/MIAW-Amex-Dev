@@ -87,17 +87,24 @@
 
 		// 🆕 NOVO: Abrir chat automaticamente se parâmetro estiver na URL
         if (shouldAutoOpenChat()) {
-            console.log('Parâmetro de chat detectado na URL. Abrindo chat automaticamente...');
-            setTimeout(function() {
-                try {
-                    // Para Embedded Messaging, usamos esta API
-                    embeddedservice_bootstrap.utilAPI.openModal();
-                    console.log('Chat aberto automaticamente!');
-                } catch (error) {
-                    console.error('Erro ao abrir chat automaticamente:', error);
-                }
-            }, 2000); // Aguarda 2 segundos para garantir que tudo carregou
+    console.log('Parâmetro de chat detectado na URL. Abrindo chat automaticamente...');
+    setTimeout(function() {
+        try {
+            // Tentativas diferentes de API
+            if (embeddedservice_bootstrap.utilAPI) {
+                // Opção 1
+                embeddedservice_bootstrap.utilAPI.maximizeWidget();
+                console.log('Chat aberto com maximizeWidget!');
+            } else if (embeddedservice_bootstrap.utilAPI) {
+                // Opção 2
+                embeddedservice_bootstrap.utilAPI.showWidget();
+                console.log('Chat aberto com showWidget!');
+            }
+        } catch (error) {
+            console.error('Erro ao abrir chat automaticamente:', error);
         }
+    }, 3000); // Aumentei para 3 segundos
+}
 	  });
    
       function initEmbeddedMessaging() {
