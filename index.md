@@ -78,7 +78,28 @@
 		  "X10_first_digits_of_the_Card" : " "
 				
 		});
-		embeddedservice_bootstrap.utilAPI.launchChat();
+
+		/* ===============================
+           AUTO-LAUNCH ROBUSTO (🔥)
+        =============================== */
+        let attempts = 0;
+        const maxAttempts = 10;
+
+        const tryLaunchChat = () => {
+          attempts++;
+          try {
+            embeddedservice_bootstrap.utilAPI.launchChat();
+            console.log("✅ Chat aberto automaticamente");
+          } catch (err) {
+            if (attempts < maxAttempts) {
+              setTimeout(tryLaunchChat, 500);
+            } else {
+              console.warn("❌ Não foi possível abrir o chat automaticamente");
+            }
+          }
+        };
+
+        setTimeout(tryLaunchChat, 500);
 	  });
    
       function initEmbeddedMessaging() {
