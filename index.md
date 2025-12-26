@@ -15,12 +15,6 @@
 
        console.log({ FIRST_NAME, LAST_NAME, EMAIL, PHONE, CLIENT_ID,
               COUNTRY_OF_CARD, BANK_NAME, BIN_NUMBER, BIN_NUMBER_MASKED }); 
-
-		// 🆕 NOVA FUNÇÃO: Verificar se deve abrir chat automaticamente
-       function shouldAutoOpenChat() {
-           const urlParams = new URLSearchParams(window.location.search);
-           return urlParams.get('chat') === 'true' || urlParams.get('openchat') === '1';
-       }
 	
 		window.addEventListener("onEmbeddedMessagingReady", function (e) {
 
@@ -84,27 +78,7 @@
 		  "X10_first_digits_of_the_Card" : " "
 				
 		});
-
-		// 🆕 NOVO: Abrir chat automaticamente se parâmetro estiver na URL
-        if (shouldAutoOpenChat()) {
-    console.log('Parâmetro de chat detectado na URL. Abrindo chat automaticamente...');
-    setTimeout(function() {
-        try {
-            // Tentativas diferentes de API
-            if (embeddedservice_bootstrap.utilAPI) {
-                // Opção 1
-                embeddedservice_bootstrap.utilAPI.maximizeWidget();
-                console.log('Chat aberto com maximizeWidget!');
-            } else if (embeddedservice_bootstrap.utilAPI) {
-                // Opção 2
-                embeddedservice_bootstrap.utilAPI.showWidget();
-                console.log('Chat aberto com showWidget!');
-            }
-        } catch (error) {
-            console.error('Erro ao abrir chat automaticamente:', error);
-        }
-    }, 3000); // Aumentei para 3 segundos
-}
+		embeddedservice_bootstrap.utilAPI.launchChat();
 	  });
    
       function initEmbeddedMessaging() {
@@ -130,9 +104,6 @@
             var finalLanguage = languageMap[LANGUAGE] || 'en-US';
             embeddedservice_bootstrap.settings.language = finalLanguage;
             console.log('Defined language:', finalLanguage);
-
-			// 🆕 NOVO: Configurações para abrir automaticamente
-            embeddedservice_bootstrap.settings.defaultMinimized = !shouldAutoOpenChat();
 
 			embeddedservice_bootstrap.init(
 				'00DOx000002jjB7',
