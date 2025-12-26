@@ -14,8 +14,12 @@
 	   var BIN_NUMBER_MASKED = BIN_NUMBER.slice(0, -4) + "****";
 
        console.log({ FIRST_NAME, LAST_NAME, EMAIL, PHONE, CLIENT_ID,
-              COUNTRY_OF_CARD, BANK_NAME, BIN_NUMBER, BIN_NUMBER_MASKED }); 
-	
+              COUNTRY_OF_CARD, BANK_NAME, BIN_NUMBER, BIN_NUMBER_MASKED });
+
+		
+		const urlParams = new URLSearchParams(window.location.search);
+		const shouldAutoOpenChat = urlParams.get("openChat") === "true";
+
 		window.addEventListener("onEmbeddedMessagingReady", function (e) {
 
 		const userAgent = navigator.userAgent;
@@ -82,6 +86,15 @@
 		/* ===============================
            AUTO-LAUNCH ROBUSTO (🔥)
         =============================== */
+		if (!shouldAutoOpenChat) {
+		console.log("Auto-open desativado para esta URL");
+		  return;
+		}
+		
+		if (sessionStorage.getItem("chatOpened")) {
+		  return;
+		}
+		
         let attempts = 0;
         const maxAttempts = 10;
 
